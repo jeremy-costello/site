@@ -11,12 +11,10 @@
   },
   "dependencies": {
     "@electric-sql/pglite": "^0.3.3",
-    "@electric-sql/pglite-tools": "^0.2.8",
     "@emotion/styled": "^11.14.0",
     "@mui/icons-material": "^7.1.2",
     "@mui/material": "^7.1.2",
     "@wllama/wllama": "^2.3.2",
-    "jszip": "^3.10.1",
     "lucide-react": "^0.518.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
