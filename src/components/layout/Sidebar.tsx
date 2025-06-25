@@ -10,15 +10,8 @@ import {
   useTheme,
   Link as MaterialLink
 } from '@mui/material';
-import {
-  Home,
-  FolderOpen,
-  Search,
-  MessageCircle,
-  Music,
-  Image
-} from 'lucide-react';
 import { Link as RouterLink, useLocation } from 'react-router-dom';
+import { navItems } from '../navigation/Navigation';
 
 const drawerWidth = 240;
 
@@ -32,23 +25,14 @@ const Sidebar = ({
   const location = useLocation();
   const theme = useTheme();
 
-  const navItems = [
-    { path: '/', label: 'Home', icon: <Home size={20} /> },
-    { path: '/background', label: 'Background', icon: <Image size={20} /> },
-    { path: '/categories', label: 'Categories', icon: <FolderOpen size={20} /> },
-    { path: '/search', label: 'Search', icon: <Search size={20} /> },
-    { path: '/chat', label: 'RAG Chat', icon: <MessageCircle size={20} /> },
-    { path: '/music', label: 'Music', icon: <Music size={20} /> },
-  ];
-
   const drawerContent = (
     <Box sx={{ height: '100%', display: 'flex', flexDirection: 'column', p: 2 }}>
       <Box mb={2}>
-        <Typography variant="h6" fontWeight="bold">
-          Article Manager
+        <Typography variant="h6" fontWeight="bold" color={theme.palette.text.primary}>
+          Site Pages
         </Typography>
-        <Typography variant="caption" color="text.secondary">
-          RAG-enabled document system
+        <Typography variant="caption" color={theme.palette.text.secondary}>
+          Navigate my site!
         </Typography>
       </Box>
 

@@ -37,7 +37,7 @@ const CategorySelector: React.FC<Props> = ({ categories, selectedCategory, onSel
       
       {categories.length === 0 ? (
         <Box sx={{ textAlign: 'center', py: 3 }}>
-          <FolderIcon sx={{ fontSize: 48, color: 'text.disabled', mb: 1 }} />
+          <FolderIcon color="disabled" sx={{ fontSize: 48, mb: 1 }} />
           <Typography variant="body2" color="text.secondary">
             No categories found. Upload some articles first!
           </Typography>
@@ -53,7 +53,7 @@ const CategorySelector: React.FC<Props> = ({ categories, selectedCategory, onSel
                   borderRadius: 1,
                   mb: 0.5,
                   '&.Mui-selected': {
-                    backgroundColor: theme.palette.primary.main + '20',
+                    backgroundColor: theme.palette.primary.contrastText + '20',
                     color: theme.palette.primary.main,
                     '&:hover': {
                       backgroundColor: theme.palette.primary.main + '30',

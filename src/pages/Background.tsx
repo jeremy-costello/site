@@ -4,17 +4,17 @@ import { backgroundImages } from '../data/BackgroundImages';
 import { useTheme } from '@mui/material/styles';
 
 interface BackgroundProps {
-  onSelect: (filename: string) => void;
-  onOpacityChange: (opacity: number) => void;
+  setSelectedBackground: (filename: string) => void;
+  setBackgroundOpacity: (opacity: number) => void;
 }
 
-const Background = ({ onSelect, onOpacityChange }: BackgroundProps) => {
+const Background = ({ setSelectedBackground, setBackgroundOpacity }: BackgroundProps) => {
   const theme = useTheme();
 
   const [opacity, setOpacity] = useState<number>(0.5);
 
   useEffect(() => {
-    onOpacityChange(opacity);
+    setBackgroundOpacity(opacity);
   }, [opacity]);
 
   return (
@@ -26,20 +26,17 @@ const Background = ({ onSelect, onOpacityChange }: BackgroundProps) => {
           top: 160,
           right: 0,
           width: 100,
-          bottom: 160,
+          bottom: 192,
           overflowY: 'auto',
-          backgroundColor: theme.palette.topbar.main,
+          backgroundColor: theme.palette.primary.contrastText,
           backdropFilter: 'blur(4px)',
-          zIndex: 1200,
           px: 1,
           pt: 2,
+          borderRadius: 1,
 
           // scrollbar
           '&::-webkit-scrollbar': {
             width: '8px',
-          },
-          '&::-webkit-scrollbar-track': {
-            backgroundColor: theme.palette.background.default,
           },
           '&::-webkit-scrollbar-thumb': {
             backgroundColor: theme.palette.text.primary,
@@ -56,17 +53,16 @@ const Background = ({ onSelect, onOpacityChange }: BackgroundProps) => {
             component="img"
             src={`/backgrounds/${img}`}
             alt={img}
-            onClick={() => onSelect(img)}
+            onClick={() => setSelectedBackground(img)}
             sx={{
               width: '100%',
               height: 60,
               objectFit: 'cover',
               borderRadius: 1,
-              mb: 1,
-              border: '2px solid transparent',
+              mb: 2,
               cursor: 'pointer',
               '&:hover': {
-                border: '2px solid #fff',
+                border: `4px solid ${theme.palette.text.primary}`,
               },
             }}
           />
@@ -80,27 +76,25 @@ const Background = ({ onSelect, onOpacityChange }: BackgroundProps) => {
           bottom: 0,
           left: 0,
           right: 0,
-          height: 64,
-          backgroundColor: theme.palette.topbar.main,
-          backdropFilter: 'blur(4px)',
+          height: 96,
+          backgroundColor: theme.palette.primary.contrastText,
           display: 'flex',
           alignItems: 'center',
-          justifyContent: 'center',
-          zIndex: 1200,
+          justifyContent: 'center'
         }}
       >
         <Box width={300}>
-          <Typography variant="caption" color="text.secondary">
+          <Typography variant="caption" color="text.primary">
             Background Opacity
           </Typography>
           <Slider
             valueLabelDisplay="auto"
             min={0}
             max={1}
-            step={0.01}
+            step={0.05}
             value={opacity}
             onChange={(_, newValue) => setOpacity(newValue as number)}
-            sx={{ color: 'text.secondary' }}
+            color="primary"
           />
         </Box>
       </Box>

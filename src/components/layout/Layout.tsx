@@ -1,5 +1,5 @@
 import { type ReactNode, useState } from 'react';
-import { Box, CssBaseline, Toolbar } from '@mui/material';
+import { Box, Toolbar } from '@mui/material';
 import Sidebar from './Sidebar';
 import TopBar from './TopBar';
 
@@ -19,7 +19,6 @@ const Layout = ({ children, toggleTheme, backgroundImage, backgroundOpacity }: L
 
   return (
     <Box sx={{ display: 'flex', minHeight: '100vh', position: 'relative' }}>
-      <CssBaseline />
       <TopBar onMenuClick={handleDrawerToggle} toggleTheme={toggleTheme} />
       <Sidebar drawerOpen={drawerOpen} onDrawerToggle={handleDrawerToggle} />
 

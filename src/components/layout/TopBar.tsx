@@ -17,9 +17,8 @@ const TopBar = ({
   return (
     <AppBar
       position="fixed"
+      color="inherit"
       sx={{
-        backgroundColor: theme.palette.topbar.main,
-        color: theme.palette.topbar.contrastText,
         // Use theme's shadows based on mode; fallback if not defined
         boxShadow: theme.palette.mode === 'dark' ? theme.shadows[8] : theme.shadows[4],
         zIndex: theme.zIndex.drawer + 1,

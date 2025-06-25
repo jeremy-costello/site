@@ -143,8 +143,8 @@ export async function getCategories(): Promise<string[]> {
 
 export async function getArticlesByCategory(category: string, limit: number): Promise<Article[]> {
   const res = await db.query(
-    `SELECT * FROM articles WHERE category = $1 LIMIT ${limit}`,
-    [category]
+    `SELECT * FROM articles WHERE category = $1 ORDER BY RANDOM() LIMIT $2`,
+    [category, limit]
   );
   return res.rows as Article[];
 }

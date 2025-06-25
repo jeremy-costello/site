@@ -41,7 +41,7 @@ const SimilaritySearch = () => {
   };
 
   return (
-    <Box>
+    <>
       <Box sx={{ mb: 3 }}>
         <Stack direction="row" spacing={2}>
           <TextField
@@ -50,9 +50,11 @@ const SimilaritySearch = () => {
             placeholder="Enter your search query..."
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            onKeyPress={handleKeyPress}
-            InputProps={{
-              startAdornment: <SearchIcon sx={{ color: 'action.active', mr: 1 }} />
+            onKeyDown={handleKeyPress}
+            slotProps={{
+              input: {
+                startAdornment: <SearchIcon sx={{ color: 'action.active', mr: 1 }} />
+              }
             }}
           />
           <Button
@@ -134,7 +136,7 @@ const SimilaritySearch = () => {
           </Stack>
         </Box>
       )}
-    </Box>
+    </>
   );
 };
 

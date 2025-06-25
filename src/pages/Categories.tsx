@@ -1,16 +1,14 @@
 // pages/Categories.tsx
 import { useEffect, useState } from 'react';
-import { 
-  Box, 
-  Typography, 
+import {
   Grid, 
-  Paper,
-  Container
+  Paper
 } from '@mui/material';
 import { getCategories, getArticlesByCategory } from '../services/db';
 import CategorySelector from '../components/categories/CategorySelector';
 import CategoryDisplay from '../components/categories/CategoryDisplay';
 import type { Article } from '../types';
+import PageHeader from '../components/layout/PageHeader';
 
 const Categories = () => {
   const [categories, setCategories] = useState<string[]>([]);
@@ -41,16 +39,7 @@ const Categories = () => {
   };
 
   return (
-    <Container maxWidth="xl">
-      <Box sx={{ mb: 4 }}>
-        <Typography variant="h3" component="h1" gutterBottom sx={{ fontWeight: 'bold' }}>
-          Browse Categories
-        </Typography>
-        <Typography variant="body1" color="text.secondary">
-          Select a category to view all articles within that category.
-        </Typography>
-      </Box>
-
+    <PageHeader height="calc(100vh- 112px)" title="Browse Categories">
       <Grid container spacing={3}>
         <Grid
           size={{
@@ -60,13 +49,9 @@ const Categories = () => {
           }}
         >
           <Paper 
-            elevation={2} 
-            sx={{ 
-              p: 3,
-              position: 'sticky',
-              top: 24,
-              maxHeight: 'calc(100vh - 100px)',
-              overflow: 'auto'
+            elevation={2}
+            sx={{
+              p: 3
             }}
           >
             <CategorySelector
@@ -91,7 +76,7 @@ const Categories = () => {
           />
         </Grid>
       </Grid>
-    </Container>
+    </PageHeader>
   );
 };
 

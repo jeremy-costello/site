@@ -1,5 +1,5 @@
 // components/categories/CategoryDisplay.tsx
-import React from 'react';
+import React from "react";
 import {
   Box,
   Typography,
@@ -10,10 +10,11 @@ import {
   Button,
   Card,
   CardContent
-} from '@mui/material';
-import CategoryIcon from '@mui/icons-material/Category';
-import ArticleIcon from '@mui/icons-material/Article';
-import type { Article } from '../../types';
+} from "@mui/material";
+import CategoryIcon from "@mui/icons-material/Category";
+import ArticleIcon from "@mui/icons-material/Article";
+import type { Article } from "../../types";
+import { useTheme } from "@mui/material/styles";
 
 interface Props {
   selectedCategory: string;
@@ -22,15 +23,17 @@ interface Props {
 }
 
 const CategoryDisplay: React.FC<Props> = ({ selectedCategory, articles, loading }) => {
+  const theme = useTheme();
+  
   if (!selectedCategory) {
     return (
-      <Paper elevation={2} sx={{ p: 4, textAlign: 'center' }}>
-        <CategoryIcon sx={{ fontSize: 64, color: 'text.disabled', mb: 2 }} />
+      <Paper elevation={2} sx={{ p: 4, textAlign: "center" }}>
+        <CategoryIcon color="disabled" sx={{ fontSize: 64, mb: 2 }} />
         <Typography variant="h6" color="text.secondary" gutterBottom>
           Select a Category
         </Typography>
         <Typography variant="body2" color="text.disabled">
-          Choose a category from the left to view its articles
+          Choose a category to view some sample articles
         </Typography>
       </Paper>
     );
@@ -38,7 +41,7 @@ const CategoryDisplay: React.FC<Props> = ({ selectedCategory, articles, loading 
 
   if (loading) {
     return (
-      <Paper elevation={2} sx={{ p: 4, textAlign: 'center' }}>
+      <Paper elevation={2} sx={{ p: 4, textAlign: "center" }}>
         <CircularProgress size={40} sx={{ mb: 2 }} />
         <Typography variant="body1" color="text.secondary">
           Loading articles...
@@ -49,14 +52,14 @@ const CategoryDisplay: React.FC<Props> = ({ selectedCategory, articles, loading 
 
   return (
     <Paper elevation={2}>
-      <Box sx={{ p: 3, borderBottom: 1, borderColor: 'divider' }}>
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-          <Typography variant="h5" component="h2" sx={{ fontWeight: 'bold', flexGrow: 1 }}>
+      <Box borderColor="divider" sx={{ p: 3, borderBottom: 1 }}>
+        <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+          <Typography variant="h5" component="h2" sx={{ fontWeight: "bold", flexGrow: 1 }}>
             Articles in "{selectedCategory}"
           </Typography>
-          <Chip 
-            label={articles.length} 
-            color="primary" 
+          <Chip
+            label={articles.length}
+            color="primary"
             variant="outlined"
             size="small"
           />
@@ -64,23 +67,39 @@ const CategoryDisplay: React.FC<Props> = ({ selectedCategory, articles, loading 
       </Box>
       
       {articles.length === 0 ? (
-        <Box sx={{ p: 4, textAlign: 'center' }}>
-          <ArticleIcon sx={{ fontSize: 48, color: 'text.disabled', mb: 1 }} />
+        <Box sx={{ p: 4, textAlign: "center" }}>
+          <ArticleIcon color="disabled" sx={{ fontSize: 48, mb: 1 }} />
           <Typography variant="body1" color="text.secondary">
             No articles found in this category.
           </Typography>
         </Box>
       ) : (
-        <Box>
+        <Box
+          sx={{
+            maxHeight: 'calc(100vh - 282px)',
+            overflowY: 'auto',
+
+              // scrollbar
+            '&::-webkit-scrollbar': {
+              width: '8px',
+            },
+            '&::-webkit-scrollbar-thumb': {
+              backgroundColor: theme.palette.text.primary,
+              borderRadius: '4px',
+            },
+            '&::-webkit-scrollbar-thumb:hover': {
+              backgroundColor: theme.palette.primary.main,
+            },
+          }}>
           {articles.map((article, index) => (
             <React.Fragment key={article.id}>
-              <Card 
+              <Card
                 variant="outlined" 
                 sx={{ 
-                  m: 2, 
-                  boxShadow: 'none',
+                  m: 2,
+                  boxShadow: "none",
                   border: 1,
-                  borderColor: 'divider'
+                  borderColor: theme.palette.divider
                 }}
               >
                 <CardContent>
@@ -107,7 +126,7 @@ const CategoryDisplay: React.FC<Props> = ({ selectedCategory, articles, loading 
                     color="text.primary"
                     sx={{ 
                       lineHeight: 1.6,
-                      whiteSpace: 'pre-wrap'
+                      whiteSpace: "pre-wrap"
                     }}
                   >
                     {article.text.length > 500 
@@ -119,7 +138,7 @@ const CategoryDisplay: React.FC<Props> = ({ selectedCategory, articles, loading 
                   {article.text.length > 500 && (
                     <Button 
                       size="small" 
-                      sx={{ mt: 1, p: 0, minWidth: 'auto' }}
+                      sx={{ mt: 1, p: 0, minWidth: "auto" }}
                       endIcon="→"
                     >
                       Read more
