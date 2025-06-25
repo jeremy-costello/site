@@ -1,23 +1,19 @@
 import React from 'react';
-import { Box, Container, Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 
 interface SectionLayoutProps {
-  height?: string; // e.g., 'calc(100vh - 112px)'
+  height: string;
   title: string;
   children?: React.ReactNode;
 }
 
-const PageHeader: React.FC<SectionLayoutProps> = ({ height = '100%', title, children }) => {
+const PageHeader: React.FC<SectionLayoutProps> = ({ height, title, children }) => {
   return (
-    <Box sx={{ height, overflow: 'hidden' }}>
-      <Container maxWidth="xl" sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
-        <Box sx={{ mb: 4 }}>
-          <Typography variant="h3" component="h1" fontWeight="bold">
-            {title}
-          </Typography>
-        </Box>
-        {children}
-      </Container>
+    <Box height={height} overflow="hidden">
+      <Typography mb={4} variant="h3" fontWeight="bold">
+        {title}
+      </Typography>
+      {children}
     </Box>
   );
 };

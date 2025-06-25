@@ -14,7 +14,6 @@ const Categories = () => {
   const [categories, setCategories] = useState<string[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>('');
   const [articles, setArticles] = useState<Article[]>([]);
-  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     loadCategories();
@@ -27,14 +26,11 @@ const Categories = () => {
 
   const handleCategorySelect = async (category: string) => {
     setSelectedCategory(category);
-    setLoading(true);
     try {
       const results = await getArticlesByCategory(category, 10);
       setArticles(results);
     } catch (error) {
       console.error('Error loading articles:', error);
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -72,7 +68,6 @@ const Categories = () => {
           <CategoryDisplay
             selectedCategory={selectedCategory}
             articles={articles}
-            loading={loading}
           />
         </Grid>
       </Grid>
