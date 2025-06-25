@@ -10,7 +10,14 @@ import {
   useTheme,
   Link as MaterialLink
 } from '@mui/material';
-import { Home, FolderOpen, Search, MessageCircle, Music } from 'lucide-react';
+import {
+  Home,
+  FolderOpen,
+  Search,
+  MessageCircle,
+  Music,
+  Image
+} from 'lucide-react';
 import { Link as RouterLink, useLocation } from 'react-router-dom';
 
 const drawerWidth = 240;
@@ -27,6 +34,7 @@ const Sidebar = ({
 
   const navItems = [
     { path: '/', label: 'Home', icon: <Home size={20} /> },
+    { path: '/background', label: 'Background', icon: <Image size={20} /> },
     { path: '/categories', label: 'Categories', icon: <FolderOpen size={20} /> },
     { path: '/search', label: 'Search', icon: <Search size={20} /> },
     { path: '/chat', label: 'RAG Chat', icon: <MessageCircle size={20} /> },

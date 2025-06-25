@@ -1,4 +1,3 @@
-// layout/Layout.tsx
 import { type ReactNode, useState } from 'react';
 import { Box, CssBaseline, Toolbar } from '@mui/material';
 import Sidebar from './Sidebar';
@@ -6,10 +5,12 @@ import TopBar from './TopBar';
 
 interface LayoutProps {
   children: ReactNode;
-  toggleTheme: () => void; // NEW
+  toggleTheme: () => void;
+  backgroundImage: string | null;
+  backgroundOpacity: number;
 }
 
-const Layout = ({ children, toggleTheme }: LayoutProps) => {
+const Layout = ({ children, toggleTheme, backgroundImage, backgroundOpacity }: LayoutProps) => {
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   const handleDrawerToggle = () => {
@@ -20,25 +21,24 @@ const Layout = ({ children, toggleTheme }: LayoutProps) => {
     <Box sx={{ display: 'flex', minHeight: '100vh', position: 'relative' }}>
       <CssBaseline />
       <TopBar onMenuClick={handleDrawerToggle} toggleTheme={toggleTheme} />
-
-      {/* Sidebar */}
       <Sidebar drawerOpen={drawerOpen} onDrawerToggle={handleDrawerToggle} />
 
-      {/* Translucent Background Image */}
-      <Box
-        sx={{
-          position: 'fixed',
-          inset: 0,
-          zIndex: -1,
-          backgroundImage: 'url(./background.jpg)',
-          backgroundSize: 'cover',
-          backgroundRepeat: 'no-repeat',
-          backgroundPosition: 'center',
-          opacity: 0.05,
-        }}
-      />
+      {/* Background image rendered here using selected filename */}
+      {backgroundImage && (
+        <Box
+          sx={{
+            position: 'fixed',
+            inset: 0,
+            zIndex: -1,
+            backgroundImage: `url(./backgrounds/${backgroundImage})`,
+            backgroundSize: 'cover',
+            backgroundRepeat: 'no-repeat',
+            backgroundPosition: 'center',
+            opacity: backgroundOpacity,
+          }}
+        />
+      )}
 
-      {/* Main Content */}
       <Box
         component="main"
         sx={{
