@@ -9,20 +9,11 @@ import {
   CardHeader
 } from '@mui/material';
 import { musicFiles } from '../data/MusicFiles';
+import PageHeader from '../components/layout/PageHeader';
 
 const Music: React.FC = () => {
   return (
-    <Container maxWidth="md" sx={{ py: 8 }}>
-      {/* Header */}
-      <Box textAlign="center" mb={4}>
-        <Typography variant="h3" fontWeight="bold" gutterBottom>
-          Music Gallery
-        </Typography>
-        <Typography variant="h6" color="text.secondary">
-          Listen to tracks from the music folder.
-        </Typography>
-      </Box>
-
+    <PageHeader title="Music">
       {/* Grid of Players */}
       <Grid container spacing={4}>
         {musicFiles.map((fileName, index) => (
@@ -49,7 +40,7 @@ const Music: React.FC = () => {
           </Grid>
         ))}
       </Grid>
-    </Container>
+    </PageHeader>
   );
 };
 

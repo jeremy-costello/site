@@ -34,7 +34,6 @@ function App() {
   });
 
   const theme = useMemo(() => getTheme(mode), [mode]);
-  console.log(theme.palette);
 
   const toggleTheme = () => {
     setMode((prev) => {
