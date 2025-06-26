@@ -7,6 +7,7 @@ import MessageIcon from '@mui/icons-material/Message';
 import MusicNoteIcon from '@mui/icons-material/MusicNote';
 import ImageIcon from '@mui/icons-material/Image';
 import EditNoteIcon from '@mui/icons-material/EditNote';
+import LanguageIcon from '@mui/icons-material/Language';
 
 import Home from '../../pages/Home';
 import Background from '../../pages/Background';
@@ -16,6 +17,7 @@ import Chat from '../../pages/Chat';
 import Music from '../../pages/Music';
 import NotFound from '../../pages/NotFound';
 import Poetry from '../../pages/Poetry';
+import Map from '../../pages/Map';
 
 const iconFontSize = "medium";
 const iconColor = "disabled";
@@ -28,6 +30,7 @@ export const navItems = [
   { path: '/chat', label: 'RAG Chat', icon: <MessageIcon fontSize={iconFontSize} color={iconColor} /> },
   { path: '/music', label: 'Music', icon: <MusicNoteIcon fontSize={iconFontSize} color={iconColor} /> },
   { path: '/poetry', label: 'Poetry', icon: <EditNoteIcon fontSize={iconFontSize} color={iconColor} /> },
+  { path: '/map', label: 'Map', icon: <LanguageIcon fontSize={iconFontSize} color={iconColor} /> },
 ];
 
 interface NavigationProps {
@@ -62,6 +65,7 @@ export const NavigationRoutes = ({
       <Route path="/chat" element={<Chat />} />
       <Route path="/music" element={<Music />} />
       <Route path="/poetry" element={<Poetry />} />
+      <Route path="/map" element={<Map />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   )

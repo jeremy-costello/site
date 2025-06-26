@@ -8,7 +8,12 @@ import {
   ListItemButton,
   ListItemText,
   Chip,
-  useTheme
+  useTheme,
+  useMediaQuery,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem
 } from '@mui/material';
 import FolderIcon from '@mui/icons-material/Folder';
 
@@ -20,6 +25,7 @@ interface Props {
 
 const CategorySelector: React.FC<Props> = ({ categories, selectedCategory, onSelect }) => {
   const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('lg'));
 
   return (
     <Box>
@@ -27,14 +33,14 @@ const CategorySelector: React.FC<Props> = ({ categories, selectedCategory, onSel
         <Typography variant="h6" component="h2" sx={{ flexGrow: 1 }}>
           Categories
         </Typography>
-        <Chip 
-          label={categories.length} 
-          size="small" 
-          color="primary" 
+        <Chip
+          label={categories.length}
+          size="small"
+          color="primary"
           variant="outlined"
         />
       </Box>
-      
+
       {categories.length === 0 ? (
         <Box sx={{ textAlign: 'center', py: 3 }}>
           <FolderIcon color="disabled" sx={{ fontSize: 48, mb: 1 }} />
@@ -45,6 +51,22 @@ const CategorySelector: React.FC<Props> = ({ categories, selectedCategory, onSel
             If nothing happens in a few seconds, you may have encountered an error.
           </Typography>
         </Box>
+      ) : isMobile ? (
+        <FormControl fullWidth size="small">
+          <InputLabel id="category-select-label">Select Category</InputLabel>
+          <Select
+            labelId="category-select-label"
+            value={selectedCategory}
+            label="Select Category"
+            onChange={(e) => onSelect(e.target.value)}
+          >
+            {categories.map((cat) => (
+              <MenuItem key={cat} value={cat}>
+                {cat}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
       ) : (
         <List disablePadding>
           {categories.map((cat) => (
@@ -64,7 +86,7 @@ const CategorySelector: React.FC<Props> = ({ categories, selectedCategory, onSel
                   }
                 }}
               >
-                <ListItemText 
+                <ListItemText
                   primary={cat}
                   primaryTypographyProps={{
                     variant: 'body2',

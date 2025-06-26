@@ -32,6 +32,8 @@ interface Props {
   };
 }
 
+const CONTENTS_CUTOFF_LENGTH = 200;
+
 const Writing: React.FC<Props> = ({ writingsBySection }) => {
   const [previews, setPreviews] = useState<Record<string, string>>({});
   const [expanded, setExpanded] = useState<Record<string, boolean>>({});
@@ -90,8 +92,8 @@ const Writing: React.FC<Props> = ({ writingsBySection }) => {
               const fullText = previews[item.title] || (item.contents ? "Loading..." : "");
               const isExpanded = expanded[item.title];
               const displayText =
-                fullText.length > 300 && !isExpanded
-                  ? `${fullText.slice(0, 300)}...`
+                fullText.length > CONTENTS_CUTOFF_LENGTH && !isExpanded
+                  ? `${fullText.slice(0, CONTENTS_CUTOFF_LENGTH)}...`
                   : fullText;
 
               const textAlign = item.align || "left";
@@ -134,13 +136,12 @@ const Writing: React.FC<Props> = ({ writingsBySection }) => {
                         )}
                       </CardContent>
 
-                      <CardActions sx={{ justifyContent: "space-between", px: 2 }}>
-                        {item.contents && (
+                      <CardActions sx={{ justifyContent: "right", px: 2 }}>
+                        {fullText.length > CONTENTS_CUTOFF_LENGTH && (
                           <Button size="small" onClick={() => toggleExpand(item.title)}>
                             {isExpanded ? "Show Less" : "Show More"}
                           </Button>
                         )}
-                        <Button size="small">Read More</Button>
                       </CardActions>
                     </Box>
                   </Card>
