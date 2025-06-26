@@ -3,27 +3,27 @@
 import { Wllama } from "@wllama/wllama";
 import { modelDownloadCallback, getWllamaConfigPath } from "./utils";
 
-const EMBED_REPO = 'nomic-ai/nomic-embed-text-v1.5-GGUF';
-const EMBED_FILE = 'nomic-embed-text-v1.5.Q4_K_M.gguf'
+export const EMBED_MODEL_REPO = 'nomic-ai/nomic-embed-text-v1.5-GGUF';
+export const EMBED_MODEL_FILE = 'nomic-embed-text-v1.5.Q4_K_M.gguf'
 
 let embedder: Wllama | null = null;
 
-export async function initEmbedder(): Promise<void> {
+export async function initEmbedder(
+  onProgress?: (progress: { loaded: number; total: number }) => void
+): Promise<void> {
   if (embedder) return;
 
   const configPaths = await getWllamaConfigPath('original');
 
-  embedder = new Wllama(
-    configPaths,
-    {
-      allowOffline: true
-    }
-  );
+  embedder = new Wllama(configPaths, {
+    allowOffline: true
+  });
+
   await embedder.loadModelFromHF(
-    EMBED_REPO,
-    EMBED_FILE,
+    EMBED_MODEL_REPO,
+    EMBED_MODEL_FILE,
     {
-      progressCallback: modelDownloadCallback,
+      progressCallback: onProgress || modelDownloadCallback,
       embeddings: true,
       pooling_type: 'LLAMA_POOLING_TYPE_MEAN',
       n_ctx: 512,

@@ -12,7 +12,7 @@ const PageHeader: React.FC<SectionLayoutProps> = ({ title, subtitle, children })
   return (
     <Box display="flex" flexDirection="column" height="100%">
       <Box mb={2}>
-        <Typography variant="h3" fontWeight="bold">
+        <Typography variant="h3" fontWeight="bold" textAlign="center">
           {title}
         </Typography>
         {subtitle && (

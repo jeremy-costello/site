@@ -5,8 +5,8 @@ import { searchSimilarArticles } from './db';
 import { modelDownloadCallback, getWllamaConfigPath } from './utils';
 import { exitEmbedder } from './embed';
 
-const CHAT_MODEL_REPO = 'unsloth/Qwen3-0.6B-GGUF';
-const CHAT_MODEL_FILE = 'Qwen3-0.6B-Q8_0.gguf';
+export const CHAT_MODEL_REPO = 'Qwen/Qwen3-0.6B-GGUF';
+export const CHAT_MODEL_FILE = 'Qwen3-0.6B-Q8_0.gguf';
 
 const DISABLE_THINKING = true;
 
@@ -22,21 +22,22 @@ export interface RetrievedArticle {
   text: string;
 }
 
-async function initLLM(): Promise<void> {
+export async function initLLM(
+  onProgress?: (progress: { loaded: number; total: number }) => void
+): Promise<void> {
   if (llm) return;
+
   const configPaths = await getWllamaConfigPath('firefox');
 
-  llm = new Wllama(
-    configPaths,
-    {
-      allowOffline: true
-    }
-  );
+  llm = new Wllama(configPaths, {
+    allowOffline: true
+  });
+
   await llm.loadModelFromHF(
     CHAT_MODEL_REPO,
     CHAT_MODEL_FILE,
     {
-      progressCallback: modelDownloadCallback,
+      progressCallback: onProgress || modelDownloadCallback,
       n_ctx: 8192,
       useCache: true,
       n_gpu_layers: 0,
