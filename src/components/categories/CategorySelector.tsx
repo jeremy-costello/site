@@ -38,8 +38,11 @@ const CategorySelector: React.FC<Props> = ({ categories, selectedCategory, onSel
       {categories.length === 0 ? (
         <Box sx={{ textAlign: 'center', py: 3 }}>
           <FolderIcon color="disabled" sx={{ fontSize: 48, mb: 1 }} />
-          <Typography variant="body2" color="text.secondary">
-            No categories found. Upload some articles first!
+          <Typography variant="body2" color="text.primary">
+            No categories found. The database may still be loading!
+          </Typography>
+          <Typography variant="caption" color="text.secondary">
+            If nothing happens in a few seconds, you may have encountered an error.
           </Typography>
         </Box>
       ) : (

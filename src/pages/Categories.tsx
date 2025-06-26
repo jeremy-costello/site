@@ -10,14 +10,20 @@ import CategoryDisplay from '../components/categories/CategoryDisplay';
 import type { Article } from '../types';
 import PageHeader from '../components/layout/PageHeader';
 
-const Categories = () => {
+interface CategoriesProps {
+  databaseLoaded: boolean;
+}
+
+const Categories = ({ databaseLoaded }: CategoriesProps) => {
   const [categories, setCategories] = useState<string[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>('');
   const [articles, setArticles] = useState<Article[]>([]);
 
   useEffect(() => {
-    loadCategories();
-  }, []);
+    if (databaseLoaded) {
+      loadCategories();
+    }
+  }, [databaseLoaded]);
 
   const loadCategories = async () => {
     const cats = await getCategories();
@@ -35,7 +41,7 @@ const Categories = () => {
   };
 
   return (
-    <PageHeader height="calc(100vh- 112px)" title="Browse Categories">
+    <PageHeader title="Browse Categories">
       <Grid container spacing={3}>
         <Grid
           size={{
@@ -44,8 +50,8 @@ const Categories = () => {
             xl: 3
           }}
         >
-          <Paper 
-            elevation={2}
+          <Paper
+            elevation={3}
             sx={{
               p: 3
             }}

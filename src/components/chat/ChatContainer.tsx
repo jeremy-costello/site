@@ -1,6 +1,6 @@
 // components/chat/ChatContainer.tsx
 import React, { useState, useRef, useEffect } from 'react';
-import { Paper } from '@mui/material';
+import { Box } from '@mui/material';
 import { generateRAGResponse } from '../../services/llm';
 import ChatHeader from './ChatHeader';
 import ChatMessages from './ChatMessages';
@@ -132,19 +132,16 @@ export default function ChatContainer({ onArticlesChange, cachedArticles }: Chat
   };
 
   return (
-    <Paper 
-      elevation={0} 
-      sx={{ 
-        display: 'flex', 
-        flexDirection: 'column', 
-        height: '100%',
-        bgcolor: 'background.default',
-        border: 1,
-        borderColor: 'divider',
-        borderRadius: '4px 0 0 4px'
-      }}
-    >
-      {/* Header */}
+    <Box sx={{ 
+      height: '100%',
+      display: 'flex',
+      flexDirection: 'column',
+      bgcolor: 'background.default',
+      border: 1,
+      borderColor: 'divider',
+      borderRadius: { xs: 1, md: '4px 0 0 4px' }
+    }}>
+      {/* Fixed Header */}
       <ChatHeader
         messageCount={messages.length}
         cachedArticlesCount={cachedArticles.length}
@@ -155,7 +152,7 @@ export default function ChatContainer({ onArticlesChange, cachedArticles }: Chat
         onParagraphsPerArticleChange={setParagraphsPerArticle}
       />
 
-      {/* Messages Area */}
+      {/* Scrollable Messages Area */}
       <ChatMessages
         messages={messages}
         loading={loading}
@@ -163,7 +160,7 @@ export default function ChatContainer({ onArticlesChange, cachedArticles }: Chat
         messagesEndRef={messagesEndRef}
       />
 
-      {/* Input Area */}
+      {/* Fixed Input Area */}
       <ChatInput
         query={query}
         loading={loading}
@@ -171,6 +168,6 @@ export default function ChatContainer({ onArticlesChange, cachedArticles }: Chat
         onSubmit={handleSubmit}
         onKeyPress={handleKeyPress}
       />
-    </Paper>
+    </Box>
   );
 }

@@ -1,21 +1,19 @@
 import { Box, Slider, Typography } from '@mui/material';
-import { useEffect, useState } from 'react';
 import { backgroundImages } from '../data/BackgroundImages';
 import { useTheme } from '@mui/material/styles';
 
 interface BackgroundProps {
   setSelectedBackground: (filename: string) => void;
+  backgroundOpacity: number;
   setBackgroundOpacity: (opacity: number) => void;
 }
 
-const Background = ({ setSelectedBackground, setBackgroundOpacity }: BackgroundProps) => {
+const Background = ({
+  setSelectedBackground,
+  backgroundOpacity,
+  setBackgroundOpacity
+}: BackgroundProps) => {
   const theme = useTheme();
-
-  const [opacity, setOpacity] = useState<number>(0.5);
-
-  useEffect(() => {
-    setBackgroundOpacity(opacity);
-  }, [opacity]);
 
   return (
     <>
@@ -53,7 +51,10 @@ const Background = ({ setSelectedBackground, setBackgroundOpacity }: BackgroundP
             component="img"
             src={`/backgrounds/${img}`}
             alt={img}
-            onClick={() => setSelectedBackground(img)}
+            onClick={() => {
+              setSelectedBackground(img);
+              localStorage.setItem("backgroundImage", img);
+            }}
             sx={{
               width: '100%',
               height: 60,
@@ -92,8 +93,11 @@ const Background = ({ setSelectedBackground, setBackgroundOpacity }: BackgroundP
             min={0}
             max={1}
             step={0.05}
-            value={opacity}
-            onChange={(_, newValue) => setOpacity(newValue as number)}
+            value={backgroundOpacity}
+            onChange={(_, newValue) => {
+              setBackgroundOpacity(newValue);
+              localStorage.setItem("backgroundOpacity", newValue.toString());
+            }}
             color="primary"
           />
         </Box>

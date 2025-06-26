@@ -1,34 +1,59 @@
 // pages/Chat.tsx
-import { 
-  Container, 
-  Typography, 
-  Paper, 
-  Box
-} from '@mui/material';
-import RAGChat from '../components/chat/RAGChat';
+import { useState } from 'react';
+import { Grid } from '@mui/material';
+import ChatContainer from '../components/chat/ChatContainer';
+import ArticlesSidebar from '../components/chat/ArticlesSidebar';
+import PageHeader from '../components/layout/PageHeader';
+
+interface RetrievedArticle {
+  title: string;
+  text: string;
+}
 
 const Chat = () => {
-  return (
-    <Container maxWidth="xl" sx={{ py: 4 }}>
-      <Box sx={{ mb: 4 }}>
-        <Typography variant="h3" component="h1" gutterBottom sx={{ 
-          fontWeight: 'bold', 
-          color: 'text.primary',
-          mb: 2 
-        }}>
-          RAG Chat
-        </Typography>
-        <Typography variant="body1" color="text.secondary">
-          Ask questions about your articles using Retrieval-Augmented Generation (RAG). 
-          The system will find relevant articles and use them to provide informed answers.
-          Use the dropdown to select how many articles to retrieve, and view them in the sidebar.
-        </Typography>
-      </Box>
+  const [cachedArticles, setCachedArticles] = useState<RetrievedArticle[]>([]);
 
-      <Paper elevation={3} sx={{ overflow: 'hidden' }}>
-        <RAGChat />
-      </Paper>
-    </Container>
+  const handleArticlesChange = (articles: RetrievedArticle[]) => {
+    setCachedArticles(articles);
+  };
+
+  return (
+    <PageHeader title="RAG Chat">
+      <Grid container spacing={0}>
+        {/* Chat Area */}
+        <Grid
+          size={{
+            xs: 12,
+            md: 8
+          }}
+          sx={{
+            height: 'calc(100vh - 184px)',
+            display: 'flex',
+            flexDirection: 'column'
+          }}
+        >
+          <ChatContainer
+            onArticlesChange={handleArticlesChange}
+            cachedArticles={cachedArticles}
+          />
+        </Grid>
+
+        {/* Articles Sidebar */}
+        <Grid
+          size={{
+            xs: 12,
+            md: 4
+          }}
+          sx={{
+            height: 'calc(100vh - 184px)',
+            display: { xs: 'none', md: 'flex' },
+            flexDirection: 'column'
+          }}
+        >
+          <ArticlesSidebar articles={cachedArticles} />
+        </Grid>
+      </Grid>
+    </PageHeader>
   );
 };
 

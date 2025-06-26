@@ -5,7 +5,7 @@ import PageHeader from '../components/layout/PageHeader';
 
 const Search = () => {
   return (
-    <PageHeader height="calc(100vh- 112px)" title="Semantic Search">
+    <PageHeader title="Semantic Search">
       <Paper 
         elevation={3}
         sx={{ 

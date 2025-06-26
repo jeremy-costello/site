@@ -1,4 +1,4 @@
-// layout/Sidebar.tsx
+// components/layout/SideBar.tsx
 import {
   Box,
   Drawer,
@@ -95,7 +95,7 @@ const Sidebar = ({
           '& .MuiDrawer-paper': {
             width: drawerWidth,
             top: '64px',
-            height: 'calc(100% - 64px)',
+            height: 'calc(100vh - 64px)',
           },
         }}
       >

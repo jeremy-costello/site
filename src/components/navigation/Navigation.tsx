@@ -28,21 +28,33 @@ export const navItems = [
 ];
 
 interface NavigationProps {
+  databaseLoaded: boolean;
   setSelectedBackground: (filename: string) => void;
+  backgroundOpacity: number;
   setBackgroundOpacity: (opacity: number) => void;
 }
 
-export const NavigationRoutes = ({ setSelectedBackground, setBackgroundOpacity }: NavigationProps) => {
+export const NavigationRoutes = ({
+  databaseLoaded,
+  setSelectedBackground,
+  backgroundOpacity,
+  setBackgroundOpacity
+}: NavigationProps) => {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/background" element={
         <Background
           setSelectedBackground={setSelectedBackground}
+          backgroundOpacity={backgroundOpacity}
           setBackgroundOpacity={setBackgroundOpacity}
         />}
       />
-      <Route path="/categories" element={<Categories />} />
+      <Route path="/categories" element={
+        <Categories
+          databaseLoaded={databaseLoaded}
+        />}
+      />
       <Route path="/search" element={<Search />} />
       <Route path="/chat" element={<Chat />} />
       <Route path="/music" element={<Music />} />

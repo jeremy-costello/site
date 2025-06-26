@@ -1,3 +1,4 @@
+// components/layout/Layout.tsx
 import { type ReactNode, useState } from 'react';
 import { Box, Toolbar } from '@mui/material';
 import Sidebar from './Sidebar';

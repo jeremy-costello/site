@@ -24,8 +24,8 @@ const CategoryDisplay: React.FC<Props> = ({ selectedCategory, articles }) => {
   
   if (!selectedCategory) {
     return (
-      <Paper elevation={2} sx={{ p: 4, textAlign: "center" }}>
-        <CategoryIcon sx={{ fontSize: 64, mb: 2 }} />
+      <Paper elevation={3} sx={{ p: 4, textAlign: "center" }}>
+        <CategoryIcon color="primary" sx={{ fontSize: 64, mb: 2 }} />
         <Typography variant="h6" gutterBottom>
           Select a Category
         </Typography>
@@ -37,7 +37,7 @@ const CategoryDisplay: React.FC<Props> = ({ selectedCategory, articles }) => {
   }
 
   return (
-    <Paper elevation={2}>
+    <Paper elevation={3}>
       <Box p={3}>
         <Box alignItems="center" display="flex">
           <Typography variant="h5" fontWeight="bold" flexGrow="1">

@@ -29,7 +29,7 @@ export default function ArticlesSidebar({ articles }: ArticlesSidebarProps) {
   
   return (
     <Paper 
-      elevation={0}
+      elevation={3}
       sx={{ 
         height: '100%',
         bgcolor: theme.palette.mode === 'light' ? 'background.paper' : 'background.default',
@@ -68,7 +68,19 @@ export default function ArticlesSidebar({ articles }: ArticlesSidebarProps) {
       <Box sx={{ 
         flex: 1, 
         overflowY: 'auto',
-        p: 1
+        p: 1,
+
+        // scrollbar
+        '&::-webkit-scrollbar': {
+          width: '8px',
+        },
+        '&::-webkit-scrollbar-thumb': {
+          backgroundColor: theme.palette.text.primary,
+          borderRadius: '4px',
+        },
+        '&::-webkit-scrollbar-thumb:hover': {
+          backgroundColor: theme.palette.primary.main,
+        },
       }}>
         {articles.length === 0 ? (
           <Box sx={{ 

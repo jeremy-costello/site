@@ -10,9 +10,12 @@ import {
   Select,
   MenuItem,
   InputLabel,
+  IconButton,
+  Drawer,
+  useMediaQuery,
   type SelectChangeEvent
 } from '@mui/material';
-import { Clear, Circle } from '@mui/icons-material';
+import { Clear, Circle, Settings } from '@mui/icons-material';
 
 interface ChatHeaderProps {
   messageCount: number;
@@ -34,6 +37,8 @@ const ChatHeader: React.FC<ChatHeaderProps> = ({
   onParagraphsPerArticleChange
 }) => {
   const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  const [drawerOpen, setDrawerOpen] = React.useState(false);
 
   const handleNumArticlesChange = (event: SelectChangeEvent<string>) => {
     const value = event.target.value;
@@ -45,118 +50,165 @@ const ChatHeader: React.FC<ChatHeaderProps> = ({
     onParagraphsPerArticleChange(value === 'all' ? 'all' : parseInt(value));
   };
 
-  return (
-    <Box sx={{
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'space-between',
-      p: 2,
-      borderBottom: 1,
-      borderColor: 'divider',
-      bgcolor: theme.palette.mode === 'light' ? 'background.paper' : 'background.default'
-    }}>
-      <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-        <Circle sx={{
-          color: 'success.main',
-          fontSize: 12
-        }} />
-        <Typography variant="h6" component="h2" sx={{ fontWeight: 600 }}>
-          RAG Assistant
-        </Typography>
-        {cachedArticlesCount > 0 && numArticles !== 'none' && (
-          <Chip
-            label={`${cachedArticlesCount} article${cachedArticlesCount > 1 ? 's' : ''} loaded`}
-            size="small"
-            variant="outlined"
-            sx={{
-              fontSize: '0.75rem',
-              height: 24
-            }}
-          />
-        )}
-      </Box>
-
-      <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-        {/* Number of Articles Selector */}
-        <FormControl size="small" sx={{ minWidth: 100 }}>
-          <InputLabel id="num-articles-label" sx={{ fontSize: '0.75rem' }}>
-            Articles
-          </InputLabel>
-          <Select
-            labelId="num-articles-label"
-            value={numArticles.toString()}
-            label="Articles"
-            onChange={handleNumArticlesChange}
-            sx={{ 
-              fontSize: '0.75rem',
-              height: 32,
-              '& .MuiOutlinedInput-notchedOutline': {
-                borderColor: 'divider'
-              }
-            }}
-          >
-            <MenuItem value="none" sx={{ fontSize: '0.75rem' }}>
-              None
-            </MenuItem>
-            {[1, 2, 3, 4, 5].map((num) => (
-              <MenuItem key={num} value={num.toString()} sx={{ fontSize: '0.75rem' }}>
-                {num} article{num !== 1 ? 's' : ''}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-
-        {/* Paragraphs Selector */}
-        <FormControl 
-          size="small" 
-          sx={{ minWidth: 110 }}
-          disabled={numArticles === 'none'}
+  const SettingsControls = () => (
+    <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, flexWrap: 'wrap' }}>
+      {/* Number of Articles Selector */}
+      <FormControl size="small" sx={{ minWidth: 100 }}>
+        <InputLabel id="num-articles-label" sx={{ fontSize: '0.75rem' }}>
+          Articles
+        </InputLabel>
+        <Select
+          labelId="num-articles-label"
+          value={numArticles.toString()}
+          label="Articles"
+          onChange={handleNumArticlesChange}
+          sx={{ 
+            fontSize: '0.75rem',
+            height: 32,
+            '& .MuiOutlinedInput-notchedOutline': {
+              borderColor: 'divider'
+            }
+          }}
         >
-          <InputLabel id="paragraphs-label" sx={{ fontSize: '0.75rem' }}>
-            Paragraphs
-          </InputLabel>
-          <Select
-            labelId="paragraphs-label"
-            value={paragraphsPerArticle.toString()}
-            label="Paragraphs"
-            onChange={handleParagraphsChange}
-            sx={{ 
-              fontSize: '0.75rem',
-              height: 32,
-              '& .MuiOutlinedInput-notchedOutline': {
-                borderColor: 'divider'
-              }
-            }}
-          >
-            {[1, 2, 3, 4, 5].map((num) => (
-              <MenuItem key={num} value={num.toString()} sx={{ fontSize: '0.75rem' }}>
-                {num} paragraph{num !== 1 ? 's' : ''}
-              </MenuItem>
-            ))}
-            <MenuItem value="all" sx={{ fontSize: '0.75rem' }}>
-              All paragraphs
+          <MenuItem value="none" sx={{ fontSize: '0.75rem' }}>
+            None
+          </MenuItem>
+          {[1, 2, 3, 4, 5].map((num) => (
+            <MenuItem key={num} value={num.toString()} sx={{ fontSize: '0.75rem' }}>
+              {num} article{num !== 1 ? 's' : ''}
             </MenuItem>
-          </Select>
-        </FormControl>
+          ))}
+        </Select>
+      </FormControl>
 
-        {messageCount > 0 && (
-          <Button
-            onClick={onClearChat}
-            startIcon={<Clear />}
-            size="small"
-            sx={{
-              color: 'text.secondary',
-              '&:hover': {
-                color: 'text.primary',
-                bgcolor: 'action.hover'
-              }
+      {/* Paragraphs Selector */}
+      <FormControl 
+        size="small" 
+        sx={{ minWidth: 110 }}
+        disabled={numArticles === 'none'}
+      >
+        <InputLabel id="paragraphs-label" sx={{ fontSize: '0.75rem' }}>
+          Paragraphs
+        </InputLabel>
+        <Select
+          labelId="paragraphs-label"
+          value={paragraphsPerArticle.toString()}
+          label="Paragraphs"
+          onChange={handleParagraphsChange}
+          sx={{ 
+            fontSize: '0.75rem',
+            height: 32,
+            '& .MuiOutlinedInput-notchedOutline': {
+              borderColor: 'divider'
+            }
+          }}
+        >
+          {[1, 2, 3, 4, 5].map((num) => (
+            <MenuItem key={num} value={num.toString()} sx={{ fontSize: '0.75rem' }}>
+              {num} paragraph{num !== 1 ? 's' : ''}
+            </MenuItem>
+          ))}
+          <MenuItem value="all" sx={{ fontSize: '0.75rem' }}>
+            All paragraphs
+          </MenuItem>
+        </Select>
+      </FormControl>
+
+      {messageCount > 0 && (
+        <Button
+          onClick={onClearChat}
+          startIcon={<Clear />}
+          size="small"
+          sx={{
+            color: 'text.secondary',
+            '&:hover': {
+              color: 'text.primary',
+              bgcolor: 'action.hover'
+            }
+          }}
+        >
+          Clear Chat
+        </Button>
+      )}
+    </Box>
+  );
+
+  return (
+    <>
+      <Box sx={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        p: { xs: 1, sm: 2 },
+        borderBottom: 1,
+        borderColor: 'divider',
+        bgcolor: theme.palette.mode === 'light' ? 'background.paper' : 'background.default',
+        flexShrink: 0
+      }}>
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, minWidth: 0 }}>
+          <Circle sx={{
+            color: 'success.main',
+            fontSize: 12
+          }} />
+          <Typography 
+            variant={isMobile ? "subtitle1" : "h6"} 
+            component="h2" 
+            sx={{ 
+              fontWeight: 600,
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+              whiteSpace: 'nowrap'
             }}
           >
-            Clear Chat
-          </Button>
+            RAG Assistant
+          </Typography>
+          {cachedArticlesCount > 0 && numArticles !== 'none' && (
+            <Chip
+              label={`${cachedArticlesCount} article${cachedArticlesCount > 1 ? 's' : ''}`}
+              size="small"
+              variant="outlined"
+              sx={{
+                fontSize: '0.75rem',
+                height: 24,
+                display: { xs: 'none', sm: 'flex' }
+              }}
+            />
+          )}
+        </Box>
+
+        {isMobile ? (
+          <IconButton
+            onClick={() => setDrawerOpen(true)}
+            size="small"
+            sx={{ color: 'text.secondary' }}
+          >
+            <Settings />
+          </IconButton>
+        ) : (
+          <SettingsControls />
         )}
       </Box>
-    </Box>
+
+      {/* Mobile Settings Drawer */}
+      <Drawer
+        anchor="right"
+        open={drawerOpen}
+        onClose={() => setDrawerOpen(false)}
+        sx={{
+          '& .MuiDrawer-paper': {
+            p: 2,
+            width: 280,
+            top: '64px',
+            height: 'calc(100vh - 64px)',
+          },
+        }}
+      >
+        <Typography variant="h6" sx={{ mb: 2 }}>
+          Settings
+        </Typography>
+        <SettingsControls />
+      </Drawer>
+    </>
   );
 };
 

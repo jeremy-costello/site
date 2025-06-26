@@ -1,21 +1,32 @@
+// components/layout/PageHeader.tsx
 import React from 'react';
 import { Box, Typography } from '@mui/material';
 
 interface SectionLayoutProps {
-  height: string;
   title: string;
+  subtitle?: string;
   children?: React.ReactNode;
 }
 
-const PageHeader: React.FC<SectionLayoutProps> = ({ height, title, children }) => {
+const PageHeader: React.FC<SectionLayoutProps> = ({ title, subtitle, children }) => {
   return (
-    <Box height={height} overflow="hidden">
-      <Typography mb={4} variant="h3" fontWeight="bold">
-        {title}
-      </Typography>
-      {children}
+    <Box display="flex" flexDirection="column" height="100%">
+      <Box mb={2}>
+        <Typography variant="h3" fontWeight="bold">
+          {title}
+        </Typography>
+        {subtitle && (
+          <Typography variant="subtitle1" color="text.secondary">
+            {subtitle}
+          </Typography>
+        )}
+      </Box>
+      <Box flex={1} overflow="hidden">
+        {children}
+      </Box>
     </Box>
   );
 };
+
 
 export default PageHeader;
