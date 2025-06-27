@@ -1,1 +1,0 @@
-The objective of this part of the website was to make a fully client-side RAG chatbot. For this I needed a dataset, a database, a text embedding model, a similarity search algorithm, and a large language model.

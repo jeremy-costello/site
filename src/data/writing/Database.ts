@@ -2,10 +2,10 @@ import { LEFT_ALIGN } from "./Constants";
 
 export const database = {
   objective: {
-    preamble: "The objective of this part of the website was to make a fully client-side RAG chatbot. For this I needed a dataset, a database, a text embedding model, a similarity search algorithm, and a large language model."
+    preamble: "The objective of this part of the website was to make a client-side retrieval-augmented generation (RAG) chatbot. For this I needed a dataset, a database, a text embedding model, a similarity search algorithm, and a large language model."
   },
   data: {
-    preamble: "Retrieval-augmented generation requires a dataset and a database to retrieve from.",
+    preamble: "RAG requires a dataset and a database to retrieve from.",
     items: [
       {
         title: "Dataset",
