@@ -1,4 +1,4 @@
-// pages/Poetry.tsx
+// pages/Database.tsx
 import { Paper } from '@mui/material';
 import Writing from '../components/writing/Writing';
 import PageHeader from '../components/layout/PageHeader';
@@ -9,7 +9,7 @@ const Database = () => {
     <PageHeader title="About the Database">
       <Paper 
         elevation={3}
-        sx={{ 
+        sx={{
           p: 4,
           borderRadius: 2
         }}

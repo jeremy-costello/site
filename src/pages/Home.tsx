@@ -7,6 +7,7 @@ import {
   CardContent,
   Grid
 } from '@mui/material';
+import { Link } from 'react-router-dom';
 import { previews } from '../data/HomePreviews';
 
 const Home = () => {
@@ -41,22 +42,36 @@ const Home = () => {
             }}
           >
             <Box height="100%" display="flex">
-              <Card sx={{ width: '100%', display: 'flex', flexDirection: 'column' }}>
-                <CardMedia
-                  component="img"
-                  height="160"
-                  image={item.image}
-                  alt={item.title}
-                />
-                <CardContent sx={{ flexGrow: 1 }}>
-                  <Typography variant="h6" gutterBottom>
-                    {item.title}
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    {item.description}
-                  </Typography>
-                </CardContent>
-              </Card>
+              <Link
+                to={item.path || "/"}
+                style={{ textDecoration: 'none', width: '100%' }}
+              >
+                <Card
+                  sx={{
+                    width: '100%',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    height: '100%'
+                  }}
+                >
+                  {item.image && (
+                    <CardMedia
+                      component="img"
+                      height="160"
+                      image={item.image}
+                      alt={item.title}
+                    />
+                  )}
+                  <CardContent sx={{ flexGrow: 1 }}>
+                    <Typography variant="h6" gutterBottom>
+                      {item.title}
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                      {item.description}
+                    </Typography>
+                  </CardContent>
+                </Card>
+              </Link>
             </Box>
           </Grid>
         ))}

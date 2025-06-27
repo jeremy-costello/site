@@ -23,7 +23,7 @@ export interface WritingItem {
 
 interface SectionData {
   preamble?: string;
-  items: WritingItem[];
+  items?: WritingItem[]; // made optional
 }
 
 interface Props {
@@ -43,7 +43,7 @@ const Writing: React.FC<Props> = ({ writingsBySection }) => {
       const previewsObj: Record<string, string> = {};
 
       const allItems = Object.values(writingsBySection)
-        .flatMap((section) => section.items);
+        .flatMap((section) => section.items ?? []); // fallback to empty array
 
       await Promise.all(
         allItems.map(async (item) => {
@@ -85,10 +85,12 @@ const Writing: React.FC<Props> = ({ writingsBySection }) => {
             </Typography>
           )}
 
-          <Divider sx={{ mb: 3 }} />
+          {(data.items && data.items.length > 0) && (
+            <Divider sx={{ mb: 3 }} />
+          )}
 
           <Grid container spacing={3} direction="column">
-            {data.items.map((item) => {
+            {(data.items ?? []).map((item) => {
               const fullText = previews[item.title] || (item.contents ? "Loading..." : "");
               const isExpanded = expanded[item.title];
               const displayText =
