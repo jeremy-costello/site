@@ -1,0 +1,1 @@
+I used Mozilla's fork(?) of Wllama, which enables FlashAttention, for "GenAI" chatting. I generate the fully formatted prompt string by concatenating the system prompt, retrieved documents, conversation history, and current user query. This allows me to use Wllama's createCompletion (rather than createChatCompletion) to generate a response from the large language model.
