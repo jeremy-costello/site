@@ -12,4 +12,12 @@ export default defineConfig({
   optimizeDeps: {
     exclude: ['@electric-sql/pglite'],
   },
+  build: {
+    rollupOptions: {
+      input: {
+        main: 'index.html',
+        fallback: 'index.html',
+      },
+    },
+  }
 })

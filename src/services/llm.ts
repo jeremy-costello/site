@@ -1,6 +1,8 @@
 // services/llm.ts
+import { BASE_PATH } from "./utils";
+
 // @ts-ignore
-import { Wllama } from "../wllama/wllama-module.mjs";
+import { Wllama } from `${BASE_PATH}/wllama/module.mjs`;
 import { searchSimilarArticles } from './db';
 import { modelDownloadCallback, getWllamaConfigPath } from './utils';
 import { exitEmbedder } from './embed';
