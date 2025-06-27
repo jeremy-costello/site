@@ -1,5 +1,5 @@
 // services/utils.ts
-export const BASE_PATH = "/site";
+export const BASE_PATH = "";
 
 const WLLAMA_WASM_PATH_FIREFOX = `${BASE_PATH}/wllama/mozilla.wasm`;
 
