@@ -1,18 +1,18 @@
 // services/llm.ts
-import { BASE_PATH } from "./utils";
-
 // @ts-ignore
-import { Wllama } from `${BASE_PATH}/wllama/module.mjs`;
 import { searchSimilarArticles } from './db';
 import { modelDownloadCallback, getWllamaConfigPath } from './utils';
 import { exitEmbedder } from './embed';
+import { BASE_PATH } from './utils';
 
 export const CHAT_MODEL_REPO = 'Qwen/Qwen3-0.6B-GGUF';
 export const CHAT_MODEL_FILE = 'Qwen3-0.6B-Q8_0.gguf';
 
 const DISABLE_THINKING = true;
 
-let llm: Wllama | null = null;
+const { Wllama } = await import(`${window.location.origin}${BASE_PATH}/wllama/module.mjs`);
+
+let llm: typeof Wllama | null = null;
 
 export interface ChatMessage {
   role: 'system' | 'user' | 'assistant';
