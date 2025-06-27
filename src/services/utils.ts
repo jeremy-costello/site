@@ -1,13 +1,13 @@
 // services/utils.ts
 export const BASE_PATH = "/site";
 
-const WLLAMA_WASM_PATH_FIREFOX = './wllama.wasm';
+const WLLAMA_WASM_PATH_FIREFOX = `${BASE_PATH}/wllama/mozilla.wasm`;
 
-const WLLAMA_ESM_PATH = '../node_modules/@wllama/wllama/esm/';
+const WLLAMA_WASM_PATH_MAIN = `${BASE_PATH}/wllama/`;
 
 const WLLAMA_CONFIG_PATHS = {
-  'single-thread/wllama.wasm': WLLAMA_ESM_PATH + 'single-thread/wllama.wasm',
-  'multi-thread/wllama.wasm': WLLAMA_ESM_PATH + 'multi-thread/wllama.wasm'
+  'single-thread/wllama.wasm': WLLAMA_WASM_PATH_MAIN + 'single.wasm',
+  'multi-thread/wllama.wasm': WLLAMA_WASM_PATH_MAIN + 'multi.wasm'
 };
 
 export async function getWllamaConfigPath(
