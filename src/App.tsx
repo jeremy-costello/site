@@ -55,7 +55,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Router>
+      <Router basename="/site">
         <Layout
           toggleTheme={toggleTheme}
           backgroundImage={selectedBackground}
