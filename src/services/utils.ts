@@ -1,4 +1,6 @@
 // services/utils.ts
+export const BASE_PATH = "/site";
+
 const WLLAMA_WASM_PATH_FIREFOX = './wllama.wasm';
 
 const WLLAMA_ESM_PATH = '../node_modules/@wllama/wllama/esm/';

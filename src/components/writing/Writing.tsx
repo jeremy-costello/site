@@ -12,6 +12,7 @@ import {
   Divider,
   Box,
 } from "@mui/material";
+import { BASE_PATH } from "../../services/utils";
 
 export interface WritingItem {
   title: string;
@@ -49,7 +50,7 @@ const Writing: React.FC<Props> = ({ writingsBySection }) => {
         allItems.map(async (item) => {
           if (!item.contents) return;
           try {
-            const response = await fetch(item.contents);
+            const response = await fetch(`${BASE_PATH}/${item.contents}`);
             const text = await response.text();
             previewsObj[item.title] = text;
           } catch (error) {

@@ -7,6 +7,7 @@ import {
 } from '@mui/material';
 import { musicFiles } from '../data/MusicFiles';
 import PageHeader from '../components/layout/PageHeader';
+import { BASE_PATH } from '../services/utils';
 
 const Music: React.FC = () => {
   return (
@@ -29,7 +30,7 @@ const Music: React.FC = () => {
               />
               <CardContent sx={{ flexGrow: 1, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <audio controls style={{ width: '100%' }}>
-                  <source src={`/music/${fileName}`} type="audio/mpeg" />
+                  <source src={`${BASE_PATH}/music/${fileName}`} type="audio/mpeg" />
                   Your browser does not support the audio element.
                 </audio>
               </CardContent>

@@ -1,6 +1,7 @@
 import { Box, Slider, Typography } from '@mui/material';
 import { backgroundImages } from '../data/BackgroundImages';
 import { useTheme } from '@mui/material/styles';
+import { BASE_PATH } from '../services/utils';
 
 interface BackgroundProps {
   setSelectedBackground: (filename: string) => void;
@@ -49,7 +50,7 @@ const Background = ({
           <Box
             key={img}
             component="img"
-            src={`/backgrounds/${img}`}
+            src={`${BASE_PATH}/backgrounds/${img}`}
             alt={img}
             onClick={() => {
               setSelectedBackground(img);
