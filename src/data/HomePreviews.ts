@@ -1,32 +1,42 @@
 export const previews = [
   {
-    title: 'Upload Articles',
-    description: 'Upload a ZIP file with categorized text documents.',
-    image: '/images/upload.png',
+    title: "Background Image",
+    description: "Change the site's background image and opacity.",
+    image: "/images/upload.png",
   },
   {
-    title: 'Browse Categories',
-    description: 'View your articles organized by folder/category.',
-    image: '/images/categories.png',
+    title: "About the Database",
+    description: "Information about the database and models for semantic search and RAG.",
+    image: "/images/upload.png",
   },
   {
-    title: 'Semantic Search',
-    description: 'Use AI-powered search to find relevant articles.',
-    image: '/images/search.png',
+    title: "Browse Categories",
+    description: "View articles in the database organized by category.",
+    image: "/images/categories.png",
   },
   {
-    title: 'RAG Chat',
-    description: 'Ask questions and get smart answers using your content.',
-    image: '/images/chat.png',
+    title: "Semantic Search",
+    description: "Search for articles in the database by semantic similarity.",
+    image: "/images/search.png",
   },
   {
-    title: 'Analytics',
-    description: 'Visualize trends across your knowledge base.',
-    image: '/images/analytics.png',
+    title: "RAG Chat",
+    description: "Talk to a chatbot about articles in the database.",
+    image: "/images/chat.png",
   },
   {
-    title: 'Settings',
-    description: 'Configure your application preferences.',
-    image: '/images/settings.png',
+    title: "Music",
+    description: "List to some of the music I have made.",
+    image: "/images/music.png",
   },
+  {
+    title: "Poetry",
+    description: "Read some of the poetry I have written.",
+    image: "/images/analytics.png",
+  },
+  {
+    title: "Cesium Map",
+    description: "Play around with a 2D/3D map using Cesium.",
+    image: "/images/analytics.png",
+  }
 ];

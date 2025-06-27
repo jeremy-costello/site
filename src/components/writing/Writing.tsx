@@ -32,7 +32,7 @@ interface Props {
   };
 }
 
-const CONTENTS_CUTOFF_LENGTH = 200;
+const CONTENTS_CUTOFF_LENGTH = 500;
 
 const Writing: React.FC<Props> = ({ writingsBySection }) => {
   const [previews, setPreviews] = useState<Record<string, string>>({});
@@ -76,7 +76,7 @@ const Writing: React.FC<Props> = ({ writingsBySection }) => {
       {Object.entries(writingsBySection).map(([section, data]) => (
         <Box key={section} sx={{ mb: 6 }}>
           <Typography variant="h5" sx={{ mb: 1 }}>
-            {section.charAt(0).toUpperCase() + section.slice(1)}
+            {section.charAt(0).toUpperCase() + section.slice(1).replace(/_/g, " ")}
           </Typography>
 
           {data.preamble && (

@@ -1,0 +1,1 @@
+The large language model I chose to use is "Qwen3-0.6B", the 8-bit "Q8_0" quantization in particular. I chose this model because it's fairly small (639MB) but still performant. Again, most of the processing time comes from prefill, so it may take a little bit for the chatbot to begin generating its response.

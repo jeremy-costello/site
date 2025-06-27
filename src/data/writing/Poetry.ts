@@ -5,9 +5,9 @@ export const poetry = {
     preamble: "Album.",
     items: [
       {
-      title: "01. Ascent",
-      contents: "/writing/poetry/01_ascent.md",
-      align: CENTER_ALIGN
+        title: "01. Ascent",
+        contents: "/writing/poetry/01_ascent.md",
+        align: CENTER_ALIGN
       },
       {
         title: "02. Butterflies",

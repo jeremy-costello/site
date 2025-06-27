@@ -1,0 +1,1 @@
+I spent a while looking for a way to do databasing and similarity search in-browser. I was initially going to use Dexie and hnswlib-wasm, but then I found PGlite. PGlite is a WebAssembly implementation of (single user mode) PostgreSQL. PGlite includes support for pgvector, which is perfect for my use case.

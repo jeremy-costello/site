@@ -1,0 +1,1 @@
+Embeddings are generated using Wllama, which is a WebAssembly implementation of llama.cpp. Text is tokenized, truncated to 512 tokens, converted to a vector embedding, and then normalized. Each normalized embedding is inserted into the PGlite database using pgvector.

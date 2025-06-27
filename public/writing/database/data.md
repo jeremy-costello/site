@@ -1,0 +1,1 @@
+I wanted a relatively small dataset of text documents. I looked around until finding this BBC articles dataset, which contains 2225 documents in 5 categories.

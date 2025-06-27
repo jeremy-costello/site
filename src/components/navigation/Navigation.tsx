@@ -8,6 +8,7 @@ import MusicNoteIcon from '@mui/icons-material/MusicNote';
 import ImageIcon from '@mui/icons-material/Image';
 import EditNoteIcon from '@mui/icons-material/EditNote';
 import LanguageIcon from '@mui/icons-material/Language';
+import StorageIcon from '@mui/icons-material/Storage';
 
 import Home from '../../pages/Home';
 import Background from '../../pages/Background';
@@ -18,6 +19,7 @@ import Music from '../../pages/Music';
 import NotFound from '../../pages/NotFound';
 import Poetry from '../../pages/Poetry';
 import Map from '../../pages/Map';
+import Database from '../../pages/Database';
 
 const iconFontSize = "medium";
 const iconColor = "disabled";
@@ -25,6 +27,7 @@ const iconColor = "disabled";
 export const navItems = [
   { path: '/', label: 'Home', icon: <HomeIcon fontSize={iconFontSize} color={iconColor} /> },
   { path: '/background', label: 'Background', icon: <ImageIcon fontSize={iconFontSize} color={iconColor} /> },
+  { path: '/database', label: 'Database', icon: <StorageIcon fontSize={iconFontSize} color={iconColor} /> },
   { path: '/categories', label: 'Categories', icon: <FolderOpenIcon fontSize={iconFontSize} color={iconColor} /> },
   { path: '/search', label: 'Search', icon: <SearchIcon fontSize={iconFontSize} color={iconColor} /> },
   { path: '/chat', label: 'RAG Chat', icon: <MessageIcon fontSize={iconFontSize} color={iconColor} /> },
@@ -56,6 +59,7 @@ export const NavigationRoutes = ({
           setBackgroundOpacity={setBackgroundOpacity}
         />}
       />
+      <Route path="/database" element={<Database />} />
       <Route path="/categories" element={
         <Categories
           databaseLoaded={databaseLoaded}
