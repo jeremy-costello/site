@@ -8,7 +8,7 @@ import {
   Grid
 } from '@mui/material';
 import { Link } from 'react-router-dom';
-import { previews } from '../data/HomePreviews';
+import { previews } from '../components/navigation/Navigation';
 
 const Home = () => {
   return (

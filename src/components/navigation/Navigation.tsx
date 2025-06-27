@@ -9,6 +9,7 @@ import ImageIcon from '@mui/icons-material/Image';
 import EditNoteIcon from '@mui/icons-material/EditNote';
 import LanguageIcon from '@mui/icons-material/Language';
 import StorageIcon from '@mui/icons-material/Storage';
+import AlbumIcon from '@mui/icons-material/Album';
 
 import Home from '../../pages/Home';
 import Background from '../../pages/Background';
@@ -20,6 +21,14 @@ import NotFound from '../../pages/NotFound';
 import Poetry from '../../pages/Poetry';
 import Map from '../../pages/Map';
 import Database from '../../pages/Database';
+import Albums from '../../pages/Albums';
+
+interface Preview {
+  title: string,
+  description: string,
+  path: string,
+  image?: string
+}
 
 const iconFontSize = "medium";
 const iconColor = "disabled";
@@ -34,6 +43,50 @@ export const navItems = [
   { path: '/music', label: 'Music', icon: <MusicNoteIcon fontSize={iconFontSize} color={iconColor} /> },
   { path: '/poetry', label: 'Poetry', icon: <EditNoteIcon fontSize={iconFontSize} color={iconColor} /> },
   { path: '/map', label: 'Map', icon: <LanguageIcon fontSize={iconFontSize} color={iconColor} /> },
+  { path: '/albums', label: 'Albums', icon: <AlbumIcon fontSize={iconFontSize} color={iconColor} /> },
+];
+
+export const previews: Preview[] = [
+  {
+    title: "Background Image",
+    description: "Change the site's background image and opacity.",
+    path: "/background"
+  },
+  {
+    title: "About the Database",
+    description: "Information about the database and models for semantic search and RAG.",
+    path: "/database",
+  },
+  {
+    title: "Browse Categories",
+    description: "View articles in the database organized by category.",
+    path: "/categories"
+  },
+  {
+    title: "Semantic Search",
+    description: "Search for articles in the database by semantic similarity.",
+    path: "/search"
+  },
+  {
+    title: "RAG Chat",
+    description: "Talk to a chatbot about articles in the database.",
+    path: "/chat"
+  },
+  {
+    title: "Music",
+    description: "Listen to some of the music I have made.",
+    path: "/music"
+  },
+  {
+    title: "Poetry",
+    description: "Read some of the poetry I have written.",
+    path: "/poetry"
+  },
+  {
+    title: "Cesium Map",
+    description: "Play around with a 2D/3D map using Cesium.",
+    path: "/map"
+  }
 ];
 
 interface NavigationProps {
@@ -70,6 +123,7 @@ export const NavigationRoutes = ({
       <Route path="/music" element={<Music />} />
       <Route path="/poetry" element={<Poetry />} />
       <Route path="/map" element={<Map />} />
+      <Route path="/albums" element={<Albums />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   )
