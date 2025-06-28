@@ -48,7 +48,18 @@ const Layout = ({ children, toggleTheme, backgroundImage, backgroundOpacity }: L
         }}
       >
         <Toolbar />
-        <Box sx={{ maxWidth: '80%', mx: 'auto' }}>{children}</Box>
+        <Box sx={{
+          maxWidth: {
+            xs: '100%',
+            sm: '90%',
+            md: '80%',
+            lg: '70%',
+            xl: '60%',
+          },
+          mx: 'auto'
+        }}>
+          {children}
+        </Box>
       </Box>
     </Box>
   );
