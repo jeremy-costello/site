@@ -4,6 +4,7 @@ import SimilaritySearch from '../components/search/SimilaritySearch';
 import PageHeader from '../components/layout/PageHeader';
 import { initEmbedder, EMBED_MODEL_REPO, EMBED_MODEL_FILE } from '../services/embed';
 import { ModelManager } from '@wllama/wllama';
+import { initDB } from '../services/db';
 
 interface Progress {
   loaded: number;
@@ -27,6 +28,7 @@ const Search = () => {
         const isModelPresent = models.some(model => model.url === embeddingModelResolveUrl);
 
         if (isModelPresent) {
+          await initDB();
           await initEmbedder(); // safe to call again — it’s idempotent
           setIsInitialized(true);
         }
@@ -43,6 +45,7 @@ const Search = () => {
   const handleInit = async () => {
     setIsLoading(true);
     try {
+      await initDB();
       await initEmbedder(({ loaded, total }: Progress) => {
         const percent = Math.round((loaded / total) * 100);
         setEmbedderProgress(percent);

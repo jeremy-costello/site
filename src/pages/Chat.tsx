@@ -6,6 +6,7 @@ import PageHeader from '../components/layout/PageHeader';
 import { initLLM, CHAT_MODEL_REPO, CHAT_MODEL_FILE } from '../services/llm';
 import { initEmbedder, EMBED_MODEL_REPO, EMBED_MODEL_FILE } from '../services/embed';
 import { ModelManager } from '@wllama/wllama';
+import { initDB } from '../services/db';
 
 interface RetrievedArticle {
   title: string;
@@ -45,6 +46,7 @@ const Chat = () => {
         const hasEmbedModel = urls.includes(embeddingModelResolveUrl);
 
         if (hasChatModel && hasEmbedModel) {
+          await initDB();
           await initLLM();
           await initEmbedder();
           setIsInitialized(true);
@@ -62,6 +64,7 @@ const Chat = () => {
   const handleInit = async () => {
     setIsLoading(true);
     try {
+      await initDB();
       await initLLM(({ loaded, total }: Progress) => {
         const percent = Math.round((loaded / total) * 100);
         setLLMProgress(percent);

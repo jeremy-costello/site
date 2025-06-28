@@ -90,14 +90,12 @@ export const previews: Preview[] = [
 ];
 
 interface NavigationProps {
-  databaseLoaded: boolean;
   setSelectedBackground: (filename: string) => void;
   backgroundOpacity: number;
   setBackgroundOpacity: (opacity: number) => void;
 }
 
 export const NavigationRoutes = ({
-  databaseLoaded,
   setSelectedBackground,
   backgroundOpacity,
   setBackgroundOpacity
@@ -113,11 +111,7 @@ export const NavigationRoutes = ({
         />}
       />
       <Route path="/database" element={<Database />} />
-      <Route path="/categories" element={
-        <Categories
-          databaseLoaded={databaseLoaded}
-        />}
-      />
+      <Route path="/categories" element={<Categories />} />
       <Route path="/search" element={<Search />} />
       <Route path="/chat" element={<Chat />} />
       <Route path="/music" element={<Music />} />

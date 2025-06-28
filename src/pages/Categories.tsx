@@ -9,26 +9,21 @@ import CategorySelector from '../components/categories/CategorySelector';
 import CategoryDisplay from '../components/categories/CategoryDisplay';
 import type { Article } from '../types';
 import PageHeader from '../components/layout/PageHeader';
+import { initDB } from '../services/db';
 
-interface CategoriesProps {
-  databaseLoaded: boolean;
-}
-
-const Categories = ({ databaseLoaded }: CategoriesProps) => {
+const Categories = () => {
   const [categories, setCategories] = useState<string[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>('');
   const [articles, setArticles] = useState<Article[]>([]);
 
   useEffect(() => {
-    if (databaseLoaded) {
-      loadCategories();
-    }
-  }, [databaseLoaded]);
-
-  const loadCategories = async () => {
-    const cats = await getCategories();
-    setCategories(cats);
-  };
+    const loadCategories = async () => {
+      await initDB(); // Initialize or load the DB
+      const cats = await getCategories();
+      setCategories(cats);
+    };
+    loadCategories();
+  }, []);
 
   const handleCategorySelect = async (category: string) => {
     setSelectedCategory(category);
