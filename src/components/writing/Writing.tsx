@@ -73,7 +73,7 @@ const Writing: React.FC<Props> = ({ writingsBySection }) => {
   };
 
   return (
-    <Box>
+    <Box overflow="hidden">
       {Object.entries(writingsBySection).map(([section, data]) => (
         <Box key={section} sx={{ mb: 6 }}>
           <Typography variant="h5" sx={{ mb: 1 }}>
@@ -103,26 +103,44 @@ const Writing: React.FC<Props> = ({ writingsBySection }) => {
 
               return (
                 <Grid key={item.title}>
-                  <Card sx={{ display: "flex", flexDirection: "row" }}>
+                  <Card
+                    sx={{
+                      display: "flex",
+                      flexDirection: { xs: "column", sm: "row" },
+                    }}
+                  >
                     {item.image?.trim() && (
                       <CardMedia
                         component="img"
                         image={item.image}
                         alt={item.title}
                         sx={{
-                          width: 160,
-                          height: 160,
+                          width: { xs: "100%", sm: 160 },
+                          height: { xs: "auto", sm: 160 },
+                          maxHeight: 200,
                           objectFit: "cover",
                         }}
                       />
                     )}
                     <Box sx={{ display: "flex", flexDirection: "column", flex: 1 }}>
-                      <CardContent sx={{ textAlign }}>
-                        <Typography variant="h6">{item.title}</Typography>
+                      <CardContent sx={{ textAlign, px: 2, py: 1 }}>
+                        <Typography variant="h6" sx={{ wordWrap: "break-word" }}>{item.title}</Typography>
 
                         {item.link?.trim() && (
-                          <Typography variant="body2" sx={{ mb: 1 }}>
-                            <Link href={item.link} target="_blank" rel="noopener" underline="hover">
+                          <Typography
+                            variant="body2"
+                            sx={{
+                              mb: 1,
+                              wordBreak: "break-word",
+                              overflowWrap: "break-word",
+                            }}
+                          >
+                            <Link
+                              href={item.link}
+                              target="_blank"
+                              rel="noopener"
+                              underline="hover"
+                            >
                               {item.link}
                             </Link>
                           </Typography>
@@ -132,7 +150,11 @@ const Writing: React.FC<Props> = ({ writingsBySection }) => {
                           <Typography
                             variant="body2"
                             color="text.secondary"
-                            sx={{ whiteSpace: "pre-line" }}
+                            sx={{
+                              mb: 1,
+                              wordBreak: "break-word",
+                              overflowWrap: "break-word",
+                            }}
                           >
                             {displayText}
                           </Typography>

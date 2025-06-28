@@ -44,11 +44,11 @@ const Layout = ({ children, toggleTheme, backgroundImage, backgroundOpacity }: L
         sx={{
           flexGrow: 1,
           p: 3,
-          width: { sm: `calc(100% - 240px)` },
+          width: '100%'
         }}
       >
         <Toolbar />
-        <Box sx={{ maxWidth: '1200px', mx: 'auto' }}>{children}</Box>
+        <Box sx={{ maxWidth: '80%', mx: 'auto' }}>{children}</Box>
       </Box>
     </Box>
   );

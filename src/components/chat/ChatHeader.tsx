@@ -37,7 +37,8 @@ const ChatHeader: React.FC<ChatHeaderProps> = ({
   onParagraphsPerArticleChange
 }) => {
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  const isMobileMd = useMediaQuery(theme.breakpoints.down('md'));
+  const isMobileSm = useMediaQuery(theme.breakpoints.down('sm'));
   const [drawerOpen, setDrawerOpen] = React.useState(false);
 
   const handleNumArticlesChange = (event: SelectChangeEvent<string>) => {
@@ -151,7 +152,7 @@ const ChatHeader: React.FC<ChatHeaderProps> = ({
             fontSize: 12
           }} />
           <Typography 
-            variant={isMobile ? "subtitle1" : "h6"} 
+            variant={isMobileMd ? "subtitle1" : "h6"} 
             component="h2" 
             sx={{ 
               fontWeight: 600,
@@ -176,7 +177,7 @@ const ChatHeader: React.FC<ChatHeaderProps> = ({
           )}
         </Box>
 
-        {isMobile ? (
+        {isMobileMd ? (
           <IconButton
             onClick={() => setDrawerOpen(true)}
             size="small"
@@ -198,8 +199,8 @@ const ChatHeader: React.FC<ChatHeaderProps> = ({
           '& .MuiDrawer-paper': {
             p: 2,
             width: 280,
-            top: '64px',
-            height: 'calc(100vh - 64px)',
+            top: isMobileSm ? '56px' : '64px',
+            height: isMobileSm ? 'calc(100vh - 56px)' : 'calc(100vh - 64px)'
           },
         }}
       >

@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react';
-import { Box } from '@mui/material';
+import { Box, useTheme, useMediaQuery } from '@mui/material';
 import {
   Viewer
 } from "@cesium/widgets";
@@ -9,11 +9,15 @@ import {
 } from "@cesium/engine";
 import { getCesiumViewer } from '../../services/map';
 
+
 interface MapSectionProps {
   is3D: boolean;
 }
 
 const MapWidget: React.FC<MapSectionProps> = ({ is3D }) => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
   const cesiumContainerRef = useRef<HTMLDivElement>(null);
   const viewerRef = useRef<Viewer | null>(null);
   const viewerInitialized = useRef(false);
@@ -60,9 +64,9 @@ const MapWidget: React.FC<MapSectionProps> = ({ is3D }) => {
         sx={{
           position: "fixed",
           width: '100%',
-          height: 'calc(100vh - 64px)',
+          height: isMobile ? 'calc(100vh - 56px)' : 'calc(100vh - 64px)',
           left: 0,
-          top: 64
+          top: isMobile ? 56 : 64
         }}
       />
     </Box>

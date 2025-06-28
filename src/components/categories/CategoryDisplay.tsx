@@ -8,8 +8,7 @@ import {
   Chip,
   Button,
   Card,
-  CardContent,
-  useMediaQuery
+  CardContent
 } from "@mui/material";
 import CategoryIcon from "@mui/icons-material/Category";
 import type { Article } from "../../types";
@@ -22,7 +21,6 @@ interface Props {
 
 const CategoryDisplay: React.FC<Props> = ({ selectedCategory, articles }) => {
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('lg'));
   
   if (!selectedCategory) {
     return (
@@ -55,7 +53,13 @@ const CategoryDisplay: React.FC<Props> = ({ selectedCategory, articles }) => {
       </Box>
       <Box
         sx={{
-          maxHeight: isMobile ? 'calc(100vh - 424px)' : 'calc(100vh - 264px)',
+          maxHeight: {
+            xs: 'calc(100vh - 504px)',
+            sm: 'calc(100vh - 424px)',
+            md: 'calc(100vh - 424px)',
+            lg: 'calc(100vh - 264px)',
+            xl: 'calc(100vh - 264px)',
+          },
           overflowY: 'auto',
 
           // scrollbar

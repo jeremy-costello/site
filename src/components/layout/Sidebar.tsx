@@ -8,6 +8,7 @@ import {
   ListItemText,
   Typography,
   useTheme,
+  useMediaQuery,
   Link as MaterialLink
 } from '@mui/material';
 import { Link as RouterLink, useLocation } from 'react-router-dom';
@@ -24,6 +25,7 @@ const Sidebar = ({
 }) => {
   const location = useLocation();
   const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   const drawerContent = (
     <Box sx={{ height: '100%', display: 'flex', flexDirection: 'column', p: 2 }}>
@@ -94,8 +96,8 @@ const Sidebar = ({
         sx={{
           '& .MuiDrawer-paper': {
             width: drawerWidth,
-            top: '64px',
-            height: 'calc(100vh - 64px)',
+            top: isMobile ? '56px' : '64px',
+            height: isMobile ? 'calc(100vh - 56px)' : 'calc(100vh - 64px)'
           },
         }}
       >

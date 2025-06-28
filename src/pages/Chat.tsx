@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Grid, Box, Typography, Button, Link, LinearProgress, CircularProgress } from '@mui/material';
+import { Grid, Box, Typography, Button, Link, LinearProgress, CircularProgress, useMediaQuery } from '@mui/material';
 import ChatContainer from '../components/chat/ChatContainer';
 import ArticlesSidebar from '../components/chat/ArticlesSidebar';
 import PageHeader from '../components/layout/PageHeader';
@@ -7,6 +7,7 @@ import { initLLM, CHAT_MODEL_REPO, CHAT_MODEL_FILE } from '../services/llm';
 import { initEmbedder, EMBED_MODEL_REPO, EMBED_MODEL_FILE } from '../services/embed';
 import { ModelManager } from '@wllama/wllama';
 import { initDB } from '../services/db';
+import { useTheme } from '@mui/material/styles';
 
 interface RetrievedArticle {
   title: string;
@@ -19,6 +20,9 @@ interface Progress {
 }
 
 const Chat = () => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
   const [cachedArticles, setCachedArticles] = useState<RetrievedArticle[]>([]);
   const [isInitialized, setIsInitialized] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -153,7 +157,11 @@ const Chat = () => {
             xs: 12,
             md: 8
           }}
-          sx={{ height: 'calc(100vh - 184px)', display: 'flex', flexDirection: 'column' }}
+          sx={{
+            height: isMobile ? 'calc(100vh - 264px)' : 'calc(100vh - 184px)',
+            display: 'flex',
+            flexDirection: 'column'
+          }}
         >
           <ChatContainer
             onArticlesChange={handleArticlesChange}
@@ -166,7 +174,11 @@ const Chat = () => {
             xs: 12,
             md: 4
           }}
-          sx={{ height: 'calc(100vh - 184px)', display: { xs: 'none', md: 'flex' }, flexDirection: 'column' }}
+          sx={{
+            height: isMobile ? 'calc(100vh - 264px)' : 'calc(100vh - 184px)',
+            display: { xs: 'none', md: 'flex' },
+            flexDirection: 'column'
+          }}
         >
           <ArticlesSidebar articles={cachedArticles} />
         </Grid>

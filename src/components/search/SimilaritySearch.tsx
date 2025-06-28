@@ -10,7 +10,8 @@ import {
   Chip,
   CircularProgress,
   Stack,
-  Divider
+  Divider,
+  useMediaQuery
 } from '@mui/material';
 import { Search as SearchIcon } from '@mui/icons-material';
 import { searchSimilarArticles } from '../../services/db';
@@ -19,6 +20,7 @@ import { useTheme } from "@mui/material/styles";
 
 const SimilaritySearch = () => {
   const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   const [query, setQuery] = useState<string>('');
   const [results, setResults] = useState<Article[]>([]);
@@ -80,7 +82,7 @@ const SimilaritySearch = () => {
           </Typography>
           <Box
             sx={{
-              maxHeight: 'calc(100vh - 392px)',
+              maxHeight: isMobile ? 'calc(100vh - 472px)' : 'calc(100vh - 392px)',
               overflowY: 'auto',
               p: 1,
 
