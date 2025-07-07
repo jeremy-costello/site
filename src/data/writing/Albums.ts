@@ -1,4 +1,5 @@
 import { LEFT_ALIGN } from "./Constants";
+import { BASE_PATH } from "../../services/utils";
 
 export const albums = {
   my_favourite_albums: {
@@ -6,7 +7,7 @@ export const albums = {
     items: [
       {
         title: "Deathconsciousness",
-        image: "https://upload.wikimedia.org/wikipedia/en/9/9b/Have_a_nice_life_deathconsciousness.jpg",
+        image: `${BASE_PATH}/images/albums/deathconsciousness.jpg`,
         align: LEFT_ALIGN
       }
     ]

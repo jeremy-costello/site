@@ -86,6 +86,11 @@ export const previews: Preview[] = [
     title: "Cesium Map",
     description: "Play around with a 2D/3D map using Cesium.",
     path: "/map"
+  },
+  {
+    title: "Favourite Albums",
+    description: "See some of my favourite albums.",
+    path: "/albums"
   }
 ];
 
