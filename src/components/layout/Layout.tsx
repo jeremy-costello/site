@@ -3,6 +3,7 @@ import { type ReactNode, useState } from 'react';
 import { Box, Toolbar } from '@mui/material';
 import Sidebar from './Sidebar';
 import TopBar from './TopBar';
+import { BASE_PATH } from '../../services/utils';
 
 interface LayoutProps {
   children: ReactNode;
@@ -30,7 +31,7 @@ const Layout = ({ children, toggleTheme, backgroundImage, backgroundOpacity }: L
             position: 'fixed',
             inset: 0,
             zIndex: -1,
-            backgroundImage: `url(./backgrounds/${backgroundImage})`,
+            backgroundImage: `url(${BASE_PATH}/images/backgrounds/${backgroundImage})`,
             backgroundSize: 'cover',
             backgroundRepeat: 'no-repeat',
             backgroundPosition: 'center',

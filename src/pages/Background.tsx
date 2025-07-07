@@ -50,7 +50,7 @@ const Background = ({
           <Box
             key={img}
             component="img"
-            src={`${BASE_PATH}/backgrounds/thumbs/${img}`}
+            src={`${BASE_PATH}/images/backgrounds/thumbs/${img}`}
             alt={img}
             onClick={() => {
               setSelectedBackground(img);
