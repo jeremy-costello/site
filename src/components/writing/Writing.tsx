@@ -146,7 +146,7 @@ const Writing: React.FC<Props> = ({ writingsBySection }) => {
                           </Typography>
                         )}
 
-                        {item.contents && (
+                        {item.contents?.trim() && (
                           <Typography
                             variant="body2"
                             color="text.secondary"

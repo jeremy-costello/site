@@ -10,6 +10,7 @@ import EditNoteIcon from '@mui/icons-material/EditNote';
 import LanguageIcon from '@mui/icons-material/Language';
 import StorageIcon from '@mui/icons-material/Storage';
 import AlbumIcon from '@mui/icons-material/Album';
+import PlaylistAddCheckIcon from '@mui/icons-material/PlaylistAddCheck';
 
 import Home from '../../pages/Home';
 import Background from '../../pages/Background';
@@ -22,6 +23,7 @@ import Poetry from '../../pages/Poetry';
 import Map from '../../pages/Map';
 import Database from '../../pages/Database';
 import Albums from '../../pages/Albums';
+import Todo from '../../pages/Todo';
 
 interface Preview {
   title: string,
@@ -44,6 +46,7 @@ export const navItems = [
   { path: '/poetry', label: 'Poetry', icon: <EditNoteIcon fontSize={iconFontSize} color={iconColor} /> },
   { path: '/map', label: 'Map', icon: <LanguageIcon fontSize={iconFontSize} color={iconColor} /> },
   { path: '/albums', label: 'Albums', icon: <AlbumIcon fontSize={iconFontSize} color={iconColor} /> },
+  { path: '/todo', label: 'Todo', icon: <PlaylistAddCheckIcon fontSize={iconFontSize} color={iconColor} /> },
 ];
 
 export const previews: Preview[] = [
@@ -91,6 +94,11 @@ export const previews: Preview[] = [
     title: "Favourite Albums",
     description: "See some of my favourite albums.",
     path: "/albums"
+  },
+  {
+    title: "Website To-do List",
+    description: "Things I plan to add to the website.",
+    path: "/todo"
   }
 ];
 
@@ -123,6 +131,7 @@ export const NavigationRoutes = ({
       <Route path="/poetry" element={<Poetry />} />
       <Route path="/map" element={<Map />} />
       <Route path="/albums" element={<Albums />} />
+      <Route path="/todo" element={<Todo />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   )
